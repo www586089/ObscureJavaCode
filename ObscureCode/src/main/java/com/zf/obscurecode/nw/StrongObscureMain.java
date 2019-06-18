@@ -21,7 +21,7 @@ public class StrongObscureMain {
      * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\filesystem\compressed\showcontents\Decompressor.java
      */
     private static String[] filePath = {
-            "D:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\XFileManager\\app\\src\\main\\java"
+            "D:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\XFileManager\\app\\src\\main\\java\\com\\ctv\\fm\\filemanager\\filesystem\\Operations.java"
     };
     public static void main(String[] args) {
         instance = new StrongObscureMain(filePath);

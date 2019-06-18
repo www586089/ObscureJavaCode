@@ -27,6 +27,9 @@ public class CodeParser {
         boolean leftBracesStart = false;
         for (int i = 0; i < length; i++) {
             String lineText = codeLines.get(i);
+            if (lineText.contains("import")) {
+                continue;
+            }
 
             CodeStructure codeStructure = null;
             if (lineText.contains(Constant.keyClass) || lineText.contains(Constant.keyInterface)) {//类、抽象类、接口
