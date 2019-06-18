@@ -2,6 +2,8 @@ package com.zf.obscurecode.nw.generator;
 
 import com.zf.obscurecode.CodeSample;
 import com.zf.obscurecode.nw.source.SourceCode;
+import com.zf.obscurecode.nw.source.VariableType;
+import com.zf.obscurecode.nw.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 public class GetSetGenerator implements Generator<List<CodeSample>> {
 
     private SourceCode sourceCode = null;
+    private VariableType variableType1 = VariableType.TypeByte;
+    private VariableType variableType2 = VariableType.TypeChar;
     public GetSetGenerator(SourceCode sourceCode) {
         this.sourceCode = sourceCode;
     }
@@ -16,7 +20,7 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
     public List<CodeSample> generator(long seeds) {
         List<CodeSample> codeSamples = new ArrayList<>();
         NameGenerator nameGenerator = new NameGenerator();
-        int blockSize = sourceCode.getCodeStructureMap().size();
+        int blockSize = sourceCode.getBlockSize();
         generateVariable(nameGenerator, codeSamples, blockSize);
         generateMethod(codeSamples, blockSize);
         return codeSamples;
@@ -30,10 +34,13 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
             codeSample.lineCount = 1;
             codeSample.variableName = name;
             codeSample.codeLine = new String[codeSample.lineCount];
+            String variableType = null;
             if (i > blockSize / 2) {
-                codeSample.codeLine[0] = "private  long " + name + ";";
+                variableType = GeneratorUtil.getVariableStrInfo(variableType1);
+                codeSample.codeLine[0] = "private  " + variableType + " " + name + ";";
             } else {
-                codeSample.codeLine[0] = "private  char " + name + ";";
+                variableType = GeneratorUtil.getVariableStrInfo(variableType2);
+                codeSample.codeLine[0] = "private  " + variableType + " " + name + ";";
             }
             codeSamples.add(codeSample);
         }
@@ -49,15 +56,18 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
 
 
 
-    private static CodeSample getCodeSampleForGet(String variableName, int blockSize, int index) {
+    private CodeSample getCodeSampleForGet(String variableName, int blockSize, int index) {
         CodeSample sample = new CodeSample();
         sample.lineCount = 3;
         sample.codeLine = new String[sample.lineCount];
+        String variableType = null;
 
         if (index > (blockSize / 2)) {
-            sample.codeLine[0] = "public long get" + String.valueOf(variableName.charAt(0)).toUpperCase() + variableName.substring(1) + "() {";
+            variableType = GeneratorUtil.getVariableStrInfo(variableType1);
+            sample.codeLine[0] = "public " + variableType + " get" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "() {";
         } else {
-            sample.codeLine[0] = "public char get" + String.valueOf(variableName.charAt(0)).toUpperCase() + variableName.substring(1) + "() {";
+            variableType = GeneratorUtil.getVariableStrInfo(variableType2);
+            sample.codeLine[0] = "public " + variableType + " get" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "() {";
         }
 
         sample.codeLine[1] = "    return " + variableName + ";";
@@ -66,15 +76,18 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
         return sample;
     }
 
-    private static CodeSample getCodeSampleForSet(String variableName, int blockSize, int index) {
+    private CodeSample getCodeSampleForSet(String variableName, int blockSize, int index) {
         CodeSample sample = new CodeSample();
         sample.lineCount = 3;
         sample.codeLine = new String[sample.lineCount];
+        String variableType = null;
 
         if (index > blockSize / 2) {
-            sample.codeLine[0] = "public void set" + String.valueOf(variableName.charAt(0)).toUpperCase() + variableName.substring(1) + "(long " + variableName + ") {";
+            variableType = GeneratorUtil.getVariableStrInfo(variableType1);
+            sample.codeLine[0] = "public void set" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "(" + variableType + " " + variableName + ") {";
         } else {
-            sample.codeLine[0] = "public void set" + String.valueOf(variableName.charAt(0)).toUpperCase() + variableName.substring(1) + "(char " + variableName + ") {";
+            variableType = GeneratorUtil.getVariableStrInfo(variableType2);
+            sample.codeLine[0] = "public void set" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "(" + variableType + " " + variableName + ") {";
         }
         sample.codeLine[1] = "    this." + variableName + " = " + variableName + ";";
         sample.codeLine[2] = "}";

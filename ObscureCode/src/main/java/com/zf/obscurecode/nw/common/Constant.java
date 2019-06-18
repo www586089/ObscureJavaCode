@@ -1,6 +1,10 @@
 package com.zf.obscurecode.nw.common;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class Constant {
+
+    public static int DEFAULT_VARIABLE_SIZE = 15;
 
     public static final String keyClass = "class";
     public static final String keyInterface = "interface";
@@ -24,4 +28,12 @@ public class Constant {
     public static final String keyLeftAngleBrackets = "<";
     public static final String keyRightAngleBrackets = ">";
 
+
+    public static class JavaTypeStrInfo {
+        public static final String typeChar = "char";
+        public static final String typeByte = "byte";
+        public static final String typeInt = "int";
+        public static final String typeLong = "long";
+        public static final String typeDouble = "double";
+    }
 }

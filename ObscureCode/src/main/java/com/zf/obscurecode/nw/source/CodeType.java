@@ -9,4 +9,5 @@ public enum  CodeType {
     BLOCK,//代码块
     LAMBDA,//Lambda表达式
     VARIABLE,//变量声明
+    ENUM,//枚举
 }

@@ -14,8 +14,14 @@ public class StrongObscureMain {
 
     private static StrongObscureMain instance = null;
     private static boolean countJavaFileCount = false;
+    /**
+     * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\asynchronous\services\ExtractService.java
+     * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\asynchronous\services\ftp\FtpReceiver.java
+     * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\asynchronous\services\ZipService.java
+     * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\filesystem\compressed\showcontents\Decompressor.java
+     */
     private static String[] filePath = {
-            "D:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\FileManager\\app\\src\\main\\java\\com\\amaze\\filemanager\\asynchronous\\asynctasks\\PrepareCopyTask.java"
+            "D:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\XFileManager\\app\\src\\main\\java"
     };
     public static void main(String[] args) {
         instance = new StrongObscureMain(filePath);

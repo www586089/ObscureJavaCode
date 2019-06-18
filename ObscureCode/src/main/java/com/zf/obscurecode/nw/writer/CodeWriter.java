@@ -35,7 +35,7 @@ public class CodeWriter {
             printWriter = new PrintWriter(outputStream);
             List<String> codeLines = sourceCode.getCodeLines();
             Map<Integer, CodeStructure> structureMap = sourceCode.getCodeStructureMap();
-            int blockSize = structureMap.size();
+            int blockSize = sourceCode.getBlockSize();
             int codeLineSize = codeLines.size();
             CodeStructure codeStructure = null;
             String lineText = null;
