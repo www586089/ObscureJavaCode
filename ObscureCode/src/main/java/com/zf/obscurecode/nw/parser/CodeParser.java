@@ -34,6 +34,9 @@ public class CodeParser {
                 if (!lineText.contains(Constant.keyLeftBraces)) {//类的开始占了多行
                     for (; i < length; i++) {
                         lineText = codeLines.get(i);
+                        if (lineText.contains("}")) {
+                            break;
+                        }
                         if (lineText.contains("{")) {
                             codeStructure = new CodeStructure(0, 0, i, codeType);
                             break;

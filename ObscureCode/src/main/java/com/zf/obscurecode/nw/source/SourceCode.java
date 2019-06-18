@@ -20,6 +20,8 @@ public class SourceCode {
             this.blockSize = codeLines.size() / 4;
             if (codeLines.size() < Constant.DEFAULT_VARIABLE_SIZE) {
                 this.blockSize = Constant.DEFAULT_VARIABLE_SIZE;
+            } else if (blockSize > Constant.MAX_VARIABLE_SIZE) {
+                this.blockSize = Constant.MAX_VARIABLE_SIZE;
             }
         } else {
             this.blockSize = Constant.DEFAULT_VARIABLE_SIZE;
