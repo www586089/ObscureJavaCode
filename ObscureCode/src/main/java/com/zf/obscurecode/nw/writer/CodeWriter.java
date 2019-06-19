@@ -49,7 +49,7 @@ public class CodeWriter {
                     if (codeStructure.isClass()) {
                         handleWriteClass(printWriter, generator.generate(CodeType.CLASS), blockSize, codeStructure);
                     } else if (codeStructure.isInterface()) {
-
+                        handleWriteInterface(printWriter, generator.generate(CodeType.INTERFACE), blockSize, codeStructure);
                     }
                 } else {
                     printWriter.println(lineText);
@@ -69,11 +69,36 @@ public class CodeWriter {
         }
     }
 
+    private void handleWriteInterface(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
+        //写类头 public class fjlsjlfs {
+        writeClassHeader(printWriter, codeSamples, blockSize, codeStructure);
+        //写变量
+        writeVariable(printWriter, codeSamples, 1, blockSize, codeStructure);
+        //写方法
+        writeMethod(printWriter, codeSamples, blockSize + 1, blockSize, codeStructure);
+        //写类结束大括号
+        writeClassTail(printWriter, codeSamples, blockSize, codeStructure);
+    }
+
+    private void writeClassHeader(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
+        if (null != codeSamples && codeSamples.size() > 0) {
+            CodeSample codeSample = codeSamples.get(0);
+            printWriter.println(codeSample.codeLine[0]);
+        }
+    }
+
+    private void writeClassTail(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
+        if (null != codeSamples && codeSamples.size() > 0) {
+            CodeSample codeSample = codeSamples.get((3 * blockSize + 2) - 1);
+            printWriter.println(codeSample.codeLine[0]);
+        }
+    }
+
     private void handleWriteClass(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
         //写变量
-        writeVariable(printWriter, codeSamples, blockSize, codeStructure);
+        writeVariable(printWriter, codeSamples, 0, blockSize, codeStructure);
         //写方法
-        writeMethod(printWriter, codeSamples, blockSize, codeStructure);
+        writeMethod(printWriter, codeSamples, blockSize, blockSize, codeStructure);
     }
 
     /***
@@ -82,8 +107,8 @@ public class CodeWriter {
      * @param codeSamples
      * @param blockSize
      */
-    private void writeVariable(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
-        for (int j = 0; j < blockSize; j++) {
+    private void writeVariable(PrintWriter printWriter, List<CodeSample> codeSamples, int indexStart, int blockSize, CodeStructure codeStructure) {
+        for (int j = indexStart; j < indexStart + blockSize; j++) {
             printWriter.println(getLineCode(codeStructure, codeSamples.get(j), 0));
         }
     }
@@ -95,8 +120,8 @@ public class CodeWriter {
      * @param blockSize
      * @param codeStructure
      */
-    private void writeMethod(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
-        for (int j = blockSize; j < 3 * blockSize; j++) {
+    private void writeMethod(PrintWriter printWriter, List<CodeSample> codeSamples, int indexStart, int blockSize, CodeStructure codeStructure) {
+        for (int j = indexStart; j < indexStart + 2 * blockSize; j++) {
             CodeSample codeSample = codeSamples.get(j);
             if (1 == codeSample.lineCount) {
                 printWriter.println(getLineCode(codeStructure, codeSample, 0));

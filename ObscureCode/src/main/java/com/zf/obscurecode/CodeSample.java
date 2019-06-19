@@ -5,4 +5,5 @@ public class CodeSample {
     public String codeLine[];
     public String prefix = "";
     public String variableName = null;
+    public String className = null;
 }

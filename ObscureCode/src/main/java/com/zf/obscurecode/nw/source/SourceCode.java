@@ -14,6 +14,9 @@ public class SourceCode {
     private int blockSize = 0;//要生存的变量数量
     private File file = null;
 
+    public SourceCode() {
+
+    }
     public SourceCode(List<String> codeLines) {
         this.codeLines = codeLines;
         if (null != codeLines && codeLines.size() > 0) {
