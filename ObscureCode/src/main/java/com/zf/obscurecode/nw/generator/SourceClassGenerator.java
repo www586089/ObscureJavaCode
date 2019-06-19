@@ -4,12 +4,20 @@ package com.zf.obscurecode.nw.generator;
 
 import com.zf.obscurecode.CodeSample;
 import com.zf.obscurecode.nw.common.Constant;
+import com.zf.obscurecode.nw.source.SourceCode;
 import com.zf.obscurecode.nw.source.VirtualSourceCode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SourceClassGenerator implements Generator<List<CodeSample>> {
+
+
+    private SourceCode sourceCode = null;
+    public SourceClassGenerator(SourceCode sourceCode) {
+        this.sourceCode = sourceCode;
+    }
+
     @Override
     public List<CodeSample> generator(long seeds) {
         NameGenerator nameGenerator = new NameGenerator();
@@ -22,7 +30,7 @@ public class SourceClassGenerator implements Generator<List<CodeSample>> {
         classHeader.codeLine[0] = "public " + Constant.keyClass  + " " + classHeader.className + " {";
         codeSampleList.add(classHeader);
 
-        GetSetGenerator getSetGenerator = new GetSetGenerator(new VirtualSourceCode());
+        GetSetGenerator getSetGenerator = new GetSetGenerator(sourceCode);
         codeSampleList.addAll(getSetGenerator.generator(System.nanoTime()));
 
         //生存类结束括号

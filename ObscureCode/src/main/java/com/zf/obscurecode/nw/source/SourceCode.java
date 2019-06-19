@@ -21,7 +21,7 @@ public class SourceCode {
         this.codeLines = codeLines;
         if (null != codeLines && codeLines.size() > 0) {
             this.blockSize = codeLines.size() / 4;
-            if (codeLines.size() < Constant.DEFAULT_VARIABLE_SIZE) {
+            if (blockSize < Constant.DEFAULT_VARIABLE_SIZE) {
                 this.blockSize = Constant.DEFAULT_VARIABLE_SIZE;
             } else if (blockSize > Constant.MAX_VARIABLE_SIZE) {
                 this.blockSize = Constant.MAX_VARIABLE_SIZE;

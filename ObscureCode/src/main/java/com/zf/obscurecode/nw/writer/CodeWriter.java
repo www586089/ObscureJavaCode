@@ -1,6 +1,7 @@
 package com.zf.obscurecode.nw.writer;
 
 import com.zf.obscurecode.CodeSample;
+import com.zf.obscurecode.nw.common.Constant;
 import com.zf.obscurecode.nw.generator.CodeGenerator;
 import com.zf.obscurecode.nw.source.CodeStructure;
 import com.zf.obscurecode.nw.source.CodeType;
@@ -38,18 +39,32 @@ public class CodeWriter {
             int blockSize = sourceCode.getBlockSize();
             int codeLineSize = codeLines.size();
             CodeStructure codeStructure = null;
+            CodeStructure enumCodeStructure = null;
             String lineText = null;
+            boolean isEnumBegin = false;
 
             for (int i = 0; i < codeLineSize; i++) {
                 lineText = codeLines.get(i);
                 codeStructure = structureMap.get(i);
 
-                if (null != codeStructure) {
+                if (isEnumBegin) {
+                    if (i == enumCodeStructure.getLineEnd()) {
+                        handleWriteEnum(printWriter, generator.generate(CodeType.ENUM), blockSize, enumCodeStructure);
+                        printWriter.println(lineText);
+                        isEnumBegin = false;
+                        enumCodeStructure = null;
+                    } else {
+                        printWriter.println(lineText);
+                    }
+                } else if (null != codeStructure) {
                     printWriter.println(lineText);
                     if (codeStructure.isClass()) {
                         handleWriteClass(printWriter, generator.generate(CodeType.CLASS), blockSize, codeStructure);
                     } else if (codeStructure.isInterface()) {
                         handleWriteInterface(printWriter, generator.generate(CodeType.INTERFACE), blockSize, codeStructure);
+                    } else if (codeStructure.isEnum()) {//枚举是在类结束处加代码
+                        isEnumBegin = true;
+                        enumCodeStructure = codeStructure;
                     }
                 } else {
                     printWriter.println(lineText);
@@ -69,6 +84,17 @@ public class CodeWriter {
         }
     }
 
+    private void handleWriteEnum(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
+        //写类头 public class fjlsjlfs {
+        writeClassHeader(printWriter, codeSamples, blockSize, codeStructure);
+        //写变量
+        writeVariable(printWriter, codeSamples, 1, blockSize, codeStructure);
+        //写方法
+        writeMethod(printWriter, codeSamples, blockSize + 1, blockSize, codeStructure);
+        //写类结束大括号
+        writeClassTail(printWriter, codeSamples, blockSize, codeStructure);
+    }
+
     private void handleWriteInterface(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
         //写类头 public class fjlsjlfs {
         writeClassHeader(printWriter, codeSamples, blockSize, codeStructure);
@@ -83,14 +109,14 @@ public class CodeWriter {
     private void writeClassHeader(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
         if (null != codeSamples && codeSamples.size() > 0) {
             CodeSample codeSample = codeSamples.get(0);
-            printWriter.println(codeSample.codeLine[0]);
+            printWriter.println(getLineCode(codeStructure, codeSample, 0, Constant.TYPE_CLASS_HEADER));
         }
     }
 
     private void writeClassTail(PrintWriter printWriter, List<CodeSample> codeSamples, int blockSize, CodeStructure codeStructure) {
         if (null != codeSamples && codeSamples.size() > 0) {
             CodeSample codeSample = codeSamples.get((3 * blockSize + 2) - 1);
-            printWriter.println(codeSample.codeLine[0]);
+            printWriter.println(getLineCode(codeStructure, codeSample, 0, Constant.TYPE_CLASS_HEADER));
         }
     }
 
@@ -109,7 +135,7 @@ public class CodeWriter {
      */
     private void writeVariable(PrintWriter printWriter, List<CodeSample> codeSamples, int indexStart, int blockSize, CodeStructure codeStructure) {
         for (int j = indexStart; j < indexStart + blockSize; j++) {
-            printWriter.println(getLineCode(codeStructure, codeSamples.get(j), 0));
+            printWriter.println(getLineCode(codeStructure, codeSamples.get(j), 0, Constant.TYPE_CLASS_MEMBER));
         }
     }
 
@@ -124,17 +150,17 @@ public class CodeWriter {
         for (int j = indexStart; j < indexStart + 2 * blockSize; j++) {
             CodeSample codeSample = codeSamples.get(j);
             if (1 == codeSample.lineCount) {
-                printWriter.println(getLineCode(codeStructure, codeSample, 0));
+                printWriter.println(getLineCode(codeStructure, codeSample, 0, Constant.TYPE_CLASS_MEMBER));
             } else {
                 for (int k = 0; k < codeSample.lineCount; k++) {
-                    printWriter.println(getLineCode(codeStructure, codeSample, k));
+                    printWriter.println(getLineCode(codeStructure, codeSample, k, Constant.TYPE_CLASS_MEMBER));
                 }
             }
         }
     }
 
-    private String getLineCode(CodeStructure codeStructure, CodeSample codeSample, int index) {
-        return ObscureUtil.getPrefix(codeStructure, 0) + codeSample.codeLine[index];
+    private String getLineCode(CodeStructure codeStructure, CodeSample codeSample, int index, int codeType) {
+        return ObscureUtil.getPrefix(codeStructure, codeType) + codeSample.codeLine[index];
     }
 
     private File getOutputFile(File file, String originPath, String parentPath, String originName) {

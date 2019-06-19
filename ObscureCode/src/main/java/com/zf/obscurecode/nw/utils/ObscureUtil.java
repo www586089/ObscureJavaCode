@@ -34,7 +34,7 @@ public class ObscureUtil {
     public static String getPrefix(CodeStructure structure, int flag) {
         String spaceStr = "";
         int deep = structure.getDeep();
-        if (0 == flag) {
+        if (Constant.TYPE_CLASS_MEMBER == flag) {
             for (int i = 0; i < deep; i++) {
                 spaceStr += "    ";
             }

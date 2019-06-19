@@ -20,6 +20,21 @@ package com.daily.javatextdemo;
  * 路由 Url
  *
  * @author Bakumon https://bakumon.me
+ *     /**
+ *      * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\asynchronous\services\ExtractService.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\ui\fragments\preference_fragments\PrefFrag.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\ui\views\drawer\CustomNavigationView.java
+ *      * D:\Android\p3_phone_cleaner\dev\main\crazyApp\XFileManager\app\src\main\java\com\amaze\filemanager\filesystem\compressed\showcontents\Decompressor.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\utils\application\AppConfig.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\utils\OTGUtil.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\utils\files\EncryptDecryptUtils.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\utils\files\GenericCopyUtil.java
+ *      * E:\Android\p3_phone_cleaner\dev\main\crazyApp\BestFileManager\app\src\main\java\com\sogo\mm\filemanager\utils\theme\AppTheme.java
+ *
+ *
+ * E:\Android\p3_phone_cleaner\dev\main\crazyApp\DCFileManager\app\src\main\java\com\fct\dbm\filemanager\asynchronous\asynctasks\ssh\SshAuthenticationTask.java
+ * E:\Android\p3_phone_cleaner\dev\main\crazyApp\DCFileManager\app\src\main\java\com\fct\dbm\filemanager\asynchronous\services\ftp\FtpReceiver.java
+ * E:\Android\p3_phone_cleaner\dev\main\crazyApp\DCFileManager\app\src\main\java\com\fct\dbm\filemanager\asynchronous\services\ftp\FtpService.java
  */
 public class Router
 

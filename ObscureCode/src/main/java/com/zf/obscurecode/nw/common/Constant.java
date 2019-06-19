@@ -9,8 +9,12 @@ public class Constant {
 
     public static final String keyClass = "class";
     public static final String keyInterface = "interface";
+    public static final String keyEnum = "enum";
     public static final String keyFileJava = ".java";
     public static final String keyFileXml = ".xml";
+
+    public static final int TYPE_CLASS_HEADER = 0;
+    public static final int TYPE_CLASS_MEMBER = 1;
 
     /**
      * 小括号( )：parenthese,复数形式,单个括弧则是parenthesis

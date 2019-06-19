@@ -62,6 +62,9 @@ public class CodeStructure {
         return CodeType.LAMBDA == codeType;
     }
 
+    public boolean isEnum() {
+        return CodeType.ENUM == codeType;
+    }
     public int getLineStart() {
         return lineStart;
     }
