@@ -12,7 +12,7 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
 
     private SourceCode sourceCode = null;
     private VariableType variableType1 = VariableType.TypeByte;
-    private VariableType variableType2 = VariableType.TypeString;
+    private VariableType variableType2 = VariableType.TypeByte;
     public GetSetGenerator(SourceCode sourceCode) {
         this.sourceCode = sourceCode;
     }
