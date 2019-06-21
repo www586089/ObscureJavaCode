@@ -1,5 +1,8 @@
 package com.zf.obscurecode.nw.source;
 
+/**
+ * 源代码结构描述
+ */
 public class CodeStructure {
     private int lineStart;//代码快开始行号
     private int lineEnd;//代码结束行号

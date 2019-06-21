@@ -1,6 +1,6 @@
 package com.zf.obscurecode.nw.generator;
 
-import com.zf.obscurecode.CodeSample;
+import com.zf.obscurecode.nw.sample.CodeSample;
 import com.zf.obscurecode.nw.source.CodeType;
 import com.zf.obscurecode.nw.source.SourceCode;
 
@@ -16,13 +16,13 @@ public class CodeGenerator {
     public List<CodeSample> generate(CodeType codeType) {
         List<CodeSample> codeSamples = null;
         switch (codeType) {
-            case CLASS://类[抽象类、一般类]
+            case CLASS://类[抽象类、一般类]------生存get set
                 GetSetGenerator getSetGenerator = new GetSetGenerator(sourceCode);
-                codeSamples = getSetGenerator.generator(System.nanoTime());
+                codeSamples = getSetGenerator.generate(System.nanoTime());
                 break;
-            case INTERFACE://接口
+            case INTERFACE://接口--------生存类
                 SourceClassGenerator sourceClassGenerator = new SourceClassGenerator(sourceCode);
-                codeSamples = sourceClassGenerator.generator(System.nanoTime());
+                codeSamples = sourceClassGenerator.generate(System.nanoTime());
                 break;
             case ANONYMOUS_CLS://匿名内部类
                 break;
@@ -34,9 +34,9 @@ public class CodeGenerator {
                 break;
             case VARIABLE://变量声明
                 break;
-            case ENUM://枚举
+            case ENUM://枚举--------生存类
                 SourceClassGenerator enumClassGenerator = new SourceClassGenerator(sourceCode);
-                codeSamples = enumClassGenerator.generator(System.nanoTime());
+                codeSamples = enumClassGenerator.generate(System.nanoTime());
                 break;
             case TYPE_NONE:
                 break;

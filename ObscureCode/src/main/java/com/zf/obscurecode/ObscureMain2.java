@@ -1,6 +1,6 @@
 package com.zf.obscurecode;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
+import com.zf.obscurecode.nw.sample.CodeSample;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static com.zf.obscurecode.Structure.BLOCK;
 import static com.zf.obscurecode.Structure.CLASS;
 import static com.zf.obscurecode.Structure.METHOD;
 

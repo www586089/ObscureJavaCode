@@ -1,4 +1,4 @@
-package com.zf.obscurecode;
+package com.zf.obscurecode.nw.sample;
 
 public class CodeSample {
     public int lineCount = 0;

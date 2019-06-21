@@ -5,6 +5,11 @@ import com.zf.obscurecode.nw.source.VariableType;
 
 public class GeneratorUtil {
 
+    /**
+     * 变量类到字符串转换
+     * @param type
+     * @return
+     */
     public static String getVariableStrInfo(VariableType type) {
         String typeName = "int";
         switch (type) {
@@ -14,6 +19,10 @@ public class GeneratorUtil {
 
             case TypeChar:
                 typeName = Constant.JavaTypeStrInfo.typeChar;
+                break;
+
+            case TypeShort:
+                typeName = Constant.JavaTypeStrInfo.typeShort;
                 break;
 
             case TypeInt:

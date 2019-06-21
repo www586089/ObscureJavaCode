@@ -3,7 +3,7 @@ package com.zf.obscurecode.nw.utils;
 public class StringUtil {
 
     /**
-     *
+     * 首字母大写
      * @param variableName
      * @return
      */

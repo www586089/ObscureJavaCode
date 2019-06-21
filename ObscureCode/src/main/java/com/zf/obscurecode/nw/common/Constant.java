@@ -6,6 +6,7 @@ public class Constant {
 
     public static final int DEFAULT_VARIABLE_SIZE = 15;
     public static final int MAX_VARIABLE_SIZE = 50;
+    public static final int VARIABLE_TRY_COUNT = 3;
 
     public static final String keyClass = "class";
     public static final String keyInterface = "interface";
@@ -23,6 +24,7 @@ public class Constant {
      * 大括号{ }：braces
      * Lambda符号 ->
      */
+    public static final String keySpace = " ";
     public static final String keyLeftBraces = "{";
     public static final String keyRightBraces = "}";
     public static final String keyLeftSquareBrackets = "[";
@@ -37,6 +39,7 @@ public class Constant {
     public static class JavaTypeStrInfo {
         public static final String typeChar = "char";
         public static final String typeByte = "byte";
+        public static final String typeShort = "short";
         public static final String typeInt = "int";
         public static final String typeLong = "long";
         public static final String typeDouble = "double";

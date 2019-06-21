@@ -47,6 +47,10 @@ public class SourceCode {
         this.codeLines = codeLines;
     }
 
+    /**
+     * 要生存的变量数
+     * @return
+     */
     public int getBlockSize() {
         return blockSize;
     }

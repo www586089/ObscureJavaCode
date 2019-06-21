@@ -1,6 +1,6 @@
 package com.zf.obscurecode.nw.generator;
 
-import com.zf.obscurecode.CodeSample;
+import com.zf.obscurecode.nw.sample.CodeSample;
 import com.zf.obscurecode.nw.source.SourceCode;
 import com.zf.obscurecode.nw.source.VariableType;
 import com.zf.obscurecode.nw.utils.StringUtil;
@@ -11,13 +11,13 @@ import java.util.List;
 public class GetSetGenerator implements Generator<List<CodeSample>> {
 
     private SourceCode sourceCode = null;
-    private VariableType variableType1 = VariableType.TypeByte;
-    private VariableType variableType2 = VariableType.TypeByte;
+    private VariableType variableType1 = VariableType.TypeShort;
+    private VariableType variableType2 = VariableType.TypeShort;
     public GetSetGenerator(SourceCode sourceCode) {
         this.sourceCode = sourceCode;
     }
     @Override
-    public List<CodeSample> generator(long seeds) {
+    public List<CodeSample> generate(long seeds) {
         List<CodeSample> codeSamples = new ArrayList<>();
         NameGenerator nameGenerator = new NameGenerator();
         int blockSize = sourceCode.getBlockSize();
@@ -30,18 +30,17 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
     private void generateVariable(NameGenerator nameGenerator, List<CodeSample> codeSamples, int blockSize) {
         for (int i = 0; i < blockSize; i++) {
             CodeSample codeSample = new CodeSample();
-            String name = nameGenerator.generator(System.nanoTime());
+            String name = nameGenerator.generate(System.nanoTime());
             codeSample.lineCount = 1;
             codeSample.variableName = name;
             codeSample.codeLine = new String[codeSample.lineCount];
             String variableType = null;
             if (i > blockSize / 2) {
                 variableType = GeneratorUtil.getVariableStrInfo(variableType1);
-                codeSample.codeLine[0] = "private  " + variableType + " " + name + ";";
             } else {
                 variableType = GeneratorUtil.getVariableStrInfo(variableType2);
-                codeSample.codeLine[0] = "private  " + variableType + " " + name + ";";
             }
+            codeSample.codeLine[0] = "private  " + variableType + " " + name + ";";
             codeSamples.add(codeSample);
         }
     }
@@ -64,12 +63,10 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
 
         if (index > (blockSize / 2)) {
             variableType = GeneratorUtil.getVariableStrInfo(variableType1);
-            sample.codeLine[0] = "public " + variableType + " get" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "() {";
         } else {
             variableType = GeneratorUtil.getVariableStrInfo(variableType2);
-            sample.codeLine[0] = "public " + variableType + " get" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "() {";
         }
-
+        sample.codeLine[0] = "public " + variableType + " " + getMethodGetName(variableName) + "() {";
         sample.codeLine[1] = "    return " + variableName + ";";
         sample.codeLine[2] = "}";
 
@@ -84,14 +81,25 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
 
         if (index > blockSize / 2) {
             variableType = GeneratorUtil.getVariableStrInfo(variableType1);
-            sample.codeLine[0] = "public void set" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "(" + variableType + " " + variableName + ") {";
         } else {
             variableType = GeneratorUtil.getVariableStrInfo(variableType2);
-            sample.codeLine[0] = "public void set" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1) + "(" + variableType + " " + variableName + ") {";
         }
+        sample.codeLine[0] = "public void " + getMethodSetName(variableName) + "(" + variableType + " " + variableName + ") {";
         sample.codeLine[1] = "    this." + variableName + " = " + variableName + ";";
         sample.codeLine[2] = "}";
 
         return sample;
+    }
+
+    private String getMethodGetName(String variableName) {
+        return "get" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1);
+    }
+
+    /**
+     * set方法名字
+     * @return
+     */
+    private String getMethodSetName(String variableName) {
+        return "set" + StringUtil.getFirstCapitalLetter(variableName) + variableName.substring(1);
     }
 }
