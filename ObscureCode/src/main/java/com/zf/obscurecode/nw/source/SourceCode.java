@@ -20,7 +20,7 @@ public class SourceCode {
     public SourceCode(List<String> codeLines) {
         this.codeLines = codeLines;
         if (null != codeLines && codeLines.size() > 0) {
-            this.blockSize = codeLines.size() / 4;
+            this.blockSize = codeLines.size() / 10;
             if (blockSize < Constant.DEFAULT_VARIABLE_SIZE) {
                 this.blockSize = Constant.DEFAULT_VARIABLE_SIZE;
             } else if (blockSize > Constant.MAX_VARIABLE_SIZE) {

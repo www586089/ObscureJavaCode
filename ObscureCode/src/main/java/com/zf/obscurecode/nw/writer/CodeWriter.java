@@ -59,8 +59,8 @@ public class CodeWriter {
                 } else if (null != codeStructure) {
                     printWriter.println(lineText);
                     if (codeStructure.isClass()) {
-                        handleWriteClass(printWriter, generator.generate(CodeType.CLASS), blockSize, codeStructure);
-//                        handleWriteEnum(printWriter, generate.generate(CodeType.ENUM), blockSize, codeStructure);
+//                        handleWriteClass(printWriter, generator.generate(CodeType.CLASS), blockSize, codeStructure);
+                        handleWriteEnum(printWriter, generator.generate(CodeType.ENUM), blockSize, codeStructure);
                     } else if (codeStructure.isInterface()) {
                         handleWriteInterface(printWriter, generator.generate(CodeType.INTERFACE), blockSize, codeStructure);
                     } else if (codeStructure.isEnum()) {//枚举是在类结束处加代码

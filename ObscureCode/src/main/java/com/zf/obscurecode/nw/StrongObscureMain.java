@@ -17,7 +17,8 @@ public class StrongObscureMain {
 
     private static String fa = "E:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\SmartFileManager\\app\\src\\main\\java\\com\\cmm\\filemanager\\utils\\MainActivityHelper.java";
     private static String[] filePath = {
-            "E:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\FileManager\\app\\src\\main\\java\\com\\amaze\\filemanager\\asynchronous"
+            "E:\\Android\\crazyApp\\VFileManager\\app\\src\\main\\java\\com\\cmos\\filemanager\\ui\\activities\\MainActivity.java",
+            "E:\\Android\\crazyApp\\VFileManager\\app\\src\\main\\java\\com\\cmos\\filemanager\\ui\\fragments\\MainFragment.java",
     };
     public static void main(String[] args) {
         instance = new StrongObscureMain(filePath);

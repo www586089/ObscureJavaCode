@@ -43,5 +43,16 @@ public class Constant {
         public static final String typeInt = "int";
         public static final String typeLong = "long";
         public static final String typeDouble = "double";
+
+
+        public static final String typeCharCapital = Character.class.getSimpleName();
+        public static final String typeByteCapital = Byte.class.getSimpleName();;
+        public static final String typeShortCapital = Short.class.getSimpleName();;
+        public static final String typeIntCapital = Integer.class.getSimpleName();;
+        public static final String typeLongCapital = Long.class.getSimpleName();;
+        public static final String typeDoubleCapital = Double.class.getSimpleName();;
+
+        public static final String typeString = String.class.getSimpleName();
+        public static final String typeCustom = "Custom";
     }
 }

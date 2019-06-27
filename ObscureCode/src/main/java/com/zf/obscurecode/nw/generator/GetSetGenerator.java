@@ -11,8 +11,8 @@ import java.util.List;
 public class GetSetGenerator implements Generator<List<CodeSample>> {
 
     private SourceCode sourceCode = null;
-    private VariableType variableType1 = VariableType.TypeShort;
-    private VariableType variableType2 = VariableType.TypeShort;
+    private VariableType variableType1 = VariableType.TypeShortCapital;
+    private VariableType variableType2 = VariableType.TypeShortCapital;
     public GetSetGenerator(SourceCode sourceCode) {
         this.sourceCode = sourceCode;
     }
@@ -23,6 +23,7 @@ public class GetSetGenerator implements Generator<List<CodeSample>> {
         int blockSize = sourceCode.getBlockSize();
         generateVariable(nameGenerator, codeSamples, blockSize);
         generateMethod(codeSamples, blockSize);
+
         return codeSamples;
     }
 

@@ -22,25 +22,25 @@ public class NameGenerator implements Generator<String> {
         int tryCount = 0;
 
         while (true) {
-            int variableLength = random.nextInt(10);
+            int variableLength = random.nextInt(15);
 
-            if (variableLength < 3) {
-                variableLength = 3;
+            if (variableLength < 5) {
+                variableLength = 5;
             }
 
             int firstCount, secondCount, thirdCount;
-            if (3 == variableLength) {
-                firstCount = 1;
+            if (5 == variableLength) {
+                firstCount = 2;
                 secondCount = 1;
-                thirdCount = 1;
-            } else if (4 == variableLength) {
-                firstCount = 1;
-                secondCount = 2;
-                thirdCount = 1;
-            } else if (5 == variableLength) {
+                thirdCount = 2;
+            } else if (6 == variableLength) {
                 firstCount = 2;
                 secondCount = 2;
-                thirdCount = 1;
+                thirdCount = 2;
+            } else if (7 == variableLength) {
+                firstCount = 2;
+                secondCount = 2;
+                thirdCount = 3;
             } else {
                 firstCount = random.nextInt(variableLength) -1;
 

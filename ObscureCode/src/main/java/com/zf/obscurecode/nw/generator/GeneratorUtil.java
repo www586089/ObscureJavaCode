@@ -36,6 +36,37 @@ public class GeneratorUtil {
             case TypeDouble:
                 typeName = Constant.JavaTypeStrInfo.typeDouble;
                 break;
+
+            case TypeByteCapital:
+                typeName = Constant.JavaTypeStrInfo.typeByteCapital;
+                break;
+
+            case TypeCharCapital:
+                typeName = Constant.JavaTypeStrInfo.typeCharCapital;
+                break;
+
+            case TypeShortCapital:
+                typeName = Constant.JavaTypeStrInfo.typeShortCapital;
+                break;
+
+            case TypeIntCapital:
+                typeName = Constant.JavaTypeStrInfo.typeIntCapital;
+                break;
+
+            case TypeLongCapital:
+                typeName = Constant.JavaTypeStrInfo.typeLongCapital;
+                break;
+
+            case TypeDoubleCapital:
+                typeName = Constant.JavaTypeStrInfo.typeDoubleCapital;
+                break;
+
+            case TypeString:
+                typeName = Constant.JavaTypeStrInfo.typeString;
+                break;
+            case TypeCustom:
+                typeName = Constant.JavaTypeStrInfo.typeCustom;
+                break;
         }
 
         return typeName;
