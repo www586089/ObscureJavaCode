@@ -11,9 +11,11 @@ import java.util.List;
 public abstract class GetSetGenerator implements Generator<List<CodeSample>> {
 
     private SourceCode sourceCode = null;
-    protected VariableType variableType1 = VariableType.TypeShortCapital;
-    protected VariableType variableType2 = VariableType.TypeShortCapital;
-    public GetSetGenerator(SourceCode sourceCode) {
+    private VariableType variableType1 = GeneratorManager.getInstance().getVariableType1();
+    private VariableType variableType2 = GeneratorManager.getInstance().getVariableType2();
+
+
+    GetSetGenerator(SourceCode sourceCode) {
         this.sourceCode = sourceCode;
     }
 

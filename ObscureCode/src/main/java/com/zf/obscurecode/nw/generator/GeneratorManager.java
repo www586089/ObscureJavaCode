@@ -17,8 +17,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
+
+/**
+ * 确定要是否要生存自定义类作为类变量类型{@link GeneratorManager#customTypeClassVariableType}，
+ * 由变量{@link GeneratorManager#variableType}决定；
+ * 否则使用内置类型作为变量类型，变量类型由{@link GeneratorManager#variableType1}及{@link GeneratorManager#variableType2}决定,
+ * 在确定使用自定义类型变量的情况下，变量{@link GeneratorManager#customTypeClsPath}决定了要生存的类的路径（包名），
+ * 变量{@link GeneratorManager#clsName}决定了要生存的类的类名。
+ */
 public class GeneratorManager {
     private static GeneratorManager INSTANCE = null;
     public static synchronized GeneratorManager getInstance() {
@@ -97,6 +104,11 @@ public class GeneratorManager {
         }
     }
 
+    /**
+     * 生存要导入的自定义类
+     * @param file          要写入的文件
+     * @param codeSamples   要写入的代码
+     */
     private void writeCode(File file, List<CodeSample> codeSamples) {
         FileOutputStream outputStream = null;
         PrintWriter printWriter = null;

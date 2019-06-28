@@ -3,7 +3,6 @@ package com.zf.obscurecode.nw.generator;
 import com.zf.obscurecode.nw.common.Constant;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
