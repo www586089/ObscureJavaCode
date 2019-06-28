@@ -1,5 +1,6 @@
 package com.zf.obscurecode.nw.writer;
 
+import com.zf.obscurecode.nw.generator.GeneratorManager;
 import com.zf.obscurecode.nw.sample.CodeSample;
 import com.zf.obscurecode.nw.common.Constant;
 import com.zf.obscurecode.nw.generator.CodeGenerator;
@@ -41,7 +42,11 @@ public class CodeWriter {
             CodeStructure codeStructure = null;
             CodeStructure enumCodeStructure = null;
             String lineText = null;
+            GeneratorManager generatorManager = GeneratorManager.getInstance();
+            boolean isCustomType = generatorManager.getVariableType().isCustomType();
             boolean isEnumBegin = false;
+            boolean hasImport = false;
+
 
             for (int i = 0; i < codeLineSize; i++) {
                 lineText = codeLines.get(i);
@@ -69,6 +74,15 @@ public class CodeWriter {
                     }
                 } else {
                     printWriter.println(lineText);
+                    /**
+                     * 自定义类需要导入相应的类
+                     */
+                    if (isCustomType && !hasImport) {
+                        hasImport = true;
+                        if (lineText.startsWith("package ")) {
+                            printWriter.println(generatorManager.getImportClassCodeLine());
+                        }
+                    }
                 }
             }
         } catch (FileNotFoundException e) {

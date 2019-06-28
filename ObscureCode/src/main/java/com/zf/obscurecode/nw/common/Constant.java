@@ -16,6 +16,7 @@ public class Constant {
 
     public static final int TYPE_CLASS_HEADER = 0;
     public static final int TYPE_CLASS_MEMBER = 1;
+    public static final int TYPE_CLASS_TAIL = 2;
 
     /**
      * 小括号( )：parenthese,复数形式,单个括弧则是parenthesis

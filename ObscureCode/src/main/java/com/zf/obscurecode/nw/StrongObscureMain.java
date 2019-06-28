@@ -2,6 +2,7 @@ package com.zf.obscurecode.nw;
 
 import com.zf.obscurecode.nw.common.Constant;
 import com.zf.obscurecode.nw.generator.CodeGenerator;
+import com.zf.obscurecode.nw.generator.GeneratorManager;
 import com.zf.obscurecode.nw.parser.CodeParser;
 import com.zf.obscurecode.nw.reader.CodeReader;
 import com.zf.obscurecode.nw.source.SourceCode;
@@ -17,8 +18,7 @@ public class StrongObscureMain {
 
     private static String fa = "E:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\SmartFileManager\\app\\src\\main\\java\\com\\cmm\\filemanager\\utils\\MainActivityHelper.java";
     private static String[] filePath = {
-            "E:\\Android\\crazyApp\\VFileManager\\app\\src\\main\\java\\com\\cmos\\filemanager\\ui\\activities\\MainActivity.java",
-            "E:\\Android\\crazyApp\\VFileManager\\app\\src\\main\\java\\com\\cmos\\filemanager\\ui\\fragments\\MainFragment.java",
+            "E:\\Android\\crazyApp\\FileManager\\app\\src\\main\\java\\com\\amaze\\filemanager\\database",
     };
     public static void main(String[] args) {
         instance = new StrongObscureMain(filePath);
@@ -26,6 +26,11 @@ public class StrongObscureMain {
         if (countJavaFileCount) {
             instance.countJavaFile(instance.pathArray);
         } else {
+            GeneratorManager generatorManager = GeneratorManager.getInstance();
+            if (generatorManager.getVariableType().isCustomType()) {
+                GeneratorManager.getInstance().init();
+            }
+
             instance.obscureStart(instance.pathArray);
         }
     }

@@ -17,7 +17,7 @@ public class CodeGenerator {
         List<CodeSample> codeSamples = null;
         switch (codeType) {
             case CLASS://类[抽象类、一般类]------生存get set
-                GetSetGenerator getSetGenerator = new GetSetGenerator(sourceCode);
+                GetSetGenerator getSetGenerator = new CommonGetSetGenerator(sourceCode);
                 codeSamples = getSetGenerator.generate(System.nanoTime());
                 break;
             case INTERFACE://接口--------生存类
