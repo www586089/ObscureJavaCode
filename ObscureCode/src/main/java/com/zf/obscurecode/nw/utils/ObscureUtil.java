@@ -35,11 +35,11 @@ public class ObscureUtil {
         String spaceStr = "";
         int deep = structure.getDeep();
         if (Constant.TYPE_CLASS_MEMBER == flag) {
-            for (int i = 0; i < deep; i++) {
+            for (int i = 0; i < deep + 1; i++) {
                 spaceStr += "    ";
             }
         } else {
-            for (int i = 0; i < deep - 1; i++) {
+            for (int i = 0; i < deep; i++) {
                 spaceStr += "    ";
             }
         }
