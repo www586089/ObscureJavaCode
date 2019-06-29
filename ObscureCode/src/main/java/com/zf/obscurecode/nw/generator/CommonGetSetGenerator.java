@@ -10,7 +10,7 @@ public class CommonGetSetGenerator extends GetSetGenerator {
 
     @Override
     protected String getVariableStrInfo(VariableType type) {
-        return GeneratorUtil.getVariableStrInfo(type);
+        return type.getTypeName();
     }
 
     @Override

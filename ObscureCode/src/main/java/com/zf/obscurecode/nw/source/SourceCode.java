@@ -7,11 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 描述读取的源代码
+ */
 public class SourceCode {
     private Map<Integer, CodeStructure> codeStructureMap = new HashMap<>();
     private List<String> codeLines = null;
 
-    private int blockSize = 0;//要生存的变量数量
+    private int blockSize = 0;//要生成的变量数量
     private File file = null;
 
     public SourceCode() {
@@ -48,8 +51,8 @@ public class SourceCode {
     }
 
     /**
-     * 要生存的变量数
-     * @return
+     * 要生成的变量数
+     * @return 变量数量
      */
     public int getBlockSize() {
         return blockSize;

@@ -1,9 +1,9 @@
 package com.zf.obscurecode.nw.writer;
 
-import com.zf.obscurecode.nw.generator.GeneratorManager;
-import com.zf.obscurecode.nw.sample.CodeSample;
 import com.zf.obscurecode.nw.common.Constant;
 import com.zf.obscurecode.nw.generator.CodeGenerator;
+import com.zf.obscurecode.nw.generator.GeneratorManager;
+import com.zf.obscurecode.nw.sample.CodeSample;
 import com.zf.obscurecode.nw.source.CodeStructure;
 import com.zf.obscurecode.nw.source.CodeType;
 import com.zf.obscurecode.nw.source.SourceCode;
@@ -164,10 +164,10 @@ public class CodeWriter {
     private void writeMethod(PrintWriter printWriter, List<CodeSample> codeSamples, int indexStart, int blockSize, CodeStructure codeStructure) {
         for (int j = indexStart; j < indexStart + 2 * blockSize; j++) {
             CodeSample codeSample = codeSamples.get(j);
-            if (1 == codeSample.lineCount) {
+            if (1 == codeSample.getLineCount()) {
                 printWriter.println(getLineCode(codeStructure, codeSample, 0, Constant.TYPE_CLASS_MEMBER));
             } else {
-                for (int k = 0; k < codeSample.lineCount; k++) {
+                for (int k = 0; k < codeSample.getLineCount(); k++) {
                     printWriter.println(getLineCode(codeStructure, codeSample, k, Constant.TYPE_CLASS_MEMBER));
                 }
             }
@@ -175,7 +175,7 @@ public class CodeWriter {
     }
 
     private String getLineCode(CodeStructure codeStructure, CodeSample codeSample, int index, int codeType) {
-        return ObscureUtil.getPrefix(codeStructure, codeType) + codeSample.codeLine[index];
+        return ObscureUtil.getPrefix(codeStructure, codeType) + codeSample.getCodeLine()[index];
     }
 
     private File getOutputFile(File file, String originPath, String parentPath, String originName) {

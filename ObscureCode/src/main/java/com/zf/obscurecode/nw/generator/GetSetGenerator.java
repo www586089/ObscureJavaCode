@@ -1,6 +1,8 @@
 package com.zf.obscurecode.nw.generator;
 
 import com.zf.obscurecode.nw.sample.CodeSample;
+import com.zf.obscurecode.nw.sample.MethodCodeSample;
+import com.zf.obscurecode.nw.sample.VariableCodeSample;
 import com.zf.obscurecode.nw.source.SourceCode;
 import com.zf.obscurecode.nw.source.VariableType;
 import com.zf.obscurecode.nw.utils.StringUtil;
@@ -22,7 +24,7 @@ public abstract class GetSetGenerator implements Generator<List<CodeSample>> {
     @Override
     public List<CodeSample> generate(long seeds) {
         List<CodeSample> codeSamples = new ArrayList<>();
-        NameGenerator nameGenerator = new NameGenerator();
+        NameGenerator nameGenerator = GeneratorManager.getInstance().getNameGenerator();
         int blockSize = sourceCode.getBlockSize();
         generateVariable(nameGenerator, codeSamples, blockSize);
         generateMethod(codeSamples, blockSize);
@@ -33,36 +35,37 @@ public abstract class GetSetGenerator implements Generator<List<CodeSample>> {
 
     private void generateVariable(NameGenerator nameGenerator, List<CodeSample> codeSamples, int blockSize) {
         for (int i = 0; i < blockSize; i++) {
-            CodeSample codeSample = new CodeSample();
+            VariableCodeSample codeSample = new VariableCodeSample();
             String name = nameGenerator.generate(System.nanoTime());
-            codeSample.lineCount = 1;
-            codeSample.variableName = name;
-            codeSample.codeLine = new String[codeSample.lineCount];
+            codeSample.setLineCount(1);
+            codeSample.setVariableName(name);
+            codeSample.setCodeLine(new String[codeSample.getLineCount()]);
             String variableType = null;
             if (i > blockSize / 2) {
                 variableType = getVariableStrInfo(variableType1);
             } else {
                 variableType = getVariableStrInfo(variableType2);
             }
-            codeSample.codeLine[0] = "private  " + variableType + " " + name + ";";
+
+            codeSample.getCodeLine()[0] = "private  " + variableType + " " + name + ";";
             codeSamples.add(codeSample);
         }
     }
 
     private void generateMethod(List<CodeSample> codeSamples, int blockSize) {
         for (int i = 0; i < blockSize; i++) {
-            String variableName = codeSamples.get(i).variableName;
-            codeSamples.add(getCodeSampleForGet(variableName, blockSize, i));//生存getter
-            codeSamples.add(getCodeSampleForSet(variableName, blockSize, i));//生存setter
+            String variableName = ((VariableCodeSample) codeSamples.get(i)).getVariableName();
+            codeSamples.add(getCodeSampleForGet(variableName, blockSize, i));//生成getter
+            codeSamples.add(getCodeSampleForSet(variableName, blockSize, i));//生成setter
         }
     }
 
 
 
-    private CodeSample getCodeSampleForGet(String variableName, int blockSize, int index) {
-        CodeSample sample = new CodeSample();
-        sample.lineCount = 3;
-        sample.codeLine = new String[sample.lineCount];
+    private MethodCodeSample getCodeSampleForGet(String variableName, int blockSize, int index) {
+        MethodCodeSample sample = new MethodCodeSample();
+        sample.setLineCount(3);
+        sample.setCodeLine(new String[sample.getLineCount()]);
         String variableType = null;
 
         if (index > (blockSize / 2)) {
@@ -70,17 +73,18 @@ public abstract class GetSetGenerator implements Generator<List<CodeSample>> {
         } else {
             variableType = getVariableStrInfo(variableType2);
         }
-        sample.codeLine[0] = "public " + variableType + " " + getMethodGetName(variableName) + "() {";
-        sample.codeLine[1] = "    return " + variableName + ";";
-        sample.codeLine[2] = "}";
+        String[] sampleCodeLine = sample.getCodeLine();
+        sampleCodeLine[0] = "public " + variableType + " " + getMethodGetName(variableName) + "() {";
+        sampleCodeLine[1] = "    return " + variableName + ";";
+        sampleCodeLine[2] = "}";
 
         return sample;
     }
 
-    private CodeSample getCodeSampleForSet(String variableName, int blockSize, int index) {
-        CodeSample sample = new CodeSample();
-        sample.lineCount = 3;
-        sample.codeLine = new String[sample.lineCount];
+    private MethodCodeSample getCodeSampleForSet(String variableName, int blockSize, int index) {
+        MethodCodeSample sample = new MethodCodeSample();
+        sample.setLineCount(3);
+        sample.setCodeLine(new String[sample.getLineCount()]);
         String variableType = null;
 
         if (index > blockSize / 2) {
@@ -88,9 +92,11 @@ public abstract class GetSetGenerator implements Generator<List<CodeSample>> {
         } else {
             variableType = getVariableStrInfo(variableType2);
         }
-        sample.codeLine[0] = "public void " + getMethodSetName(variableName) + "(" + variableType + " " + variableName + ") {";
-        sample.codeLine[1] = "    this." + variableName + " = " + variableName + ";";
-        sample.codeLine[2] = "}";
+
+        String[] sampleCodeLine = sample.getCodeLine();
+        sampleCodeLine[0] = "public void " + getMethodSetName(variableName) + "(" + variableType + " " + variableName + ") {";
+        sampleCodeLine[1] = "    this." + variableName + " = " + variableName + ";";
+        sampleCodeLine[2] = "}";
 
         return sample;
     }

@@ -32,20 +32,20 @@ public class ObscureUtil {
 
 
     public static String getPrefix(CodeStructure structure, int flag) {
-        String spaceStr = "";
+        StringBuilder spaceStr = new StringBuilder();
         int deep = structure.getDeep();
         if (Constant.TYPE_CLASS_MEMBER == flag) {
             for (int i = 0; i < deep + 1; i++) {
-                spaceStr += "    ";
+                spaceStr.append("    ");
             }
         } else {
             for (int i = 0; i < deep; i++) {
-                spaceStr += "    ";
+                spaceStr.append("    ");
             }
         }
 
 
-        return spaceStr;
+        return spaceStr.toString();
     }
 
 

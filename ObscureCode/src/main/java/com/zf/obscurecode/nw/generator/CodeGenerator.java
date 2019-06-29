@@ -16,11 +16,11 @@ public class CodeGenerator {
     public List<CodeSample> generate(CodeType codeType) {
         List<CodeSample> codeSamples = null;
         switch (codeType) {
-            case CLASS://类[抽象类、一般类]------生存get set
+            case CLASS://类[抽象类、一般类]------生成get set
                 GetSetGenerator getSetGenerator = new CommonGetSetGenerator(sourceCode);
                 codeSamples = getSetGenerator.generate(System.nanoTime());
                 break;
-            case INTERFACE://接口--------生存类
+            case INTERFACE://接口--------生成类
                 SourceClassGenerator sourceClassGenerator = new SourceClassGenerator(sourceCode);
                 codeSamples = sourceClassGenerator.generate(System.nanoTime());
                 break;
@@ -34,7 +34,7 @@ public class CodeGenerator {
                 break;
             case VARIABLE://变量声明
                 break;
-            case ENUM://枚举--------生存类
+            case ENUM://枚举--------生成类
                 SourceClassGenerator enumClassGenerator = new SourceClassGenerator(sourceCode);
                 codeSamples = enumClassGenerator.generate(System.nanoTime());
                 break;

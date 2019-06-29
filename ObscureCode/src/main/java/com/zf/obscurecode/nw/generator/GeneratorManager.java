@@ -2,6 +2,7 @@ package com.zf.obscurecode.nw.generator;
 
 import com.zf.obscurecode.nw.common.Constant;
 import com.zf.obscurecode.nw.sample.CodeSample;
+import com.zf.obscurecode.nw.sample.ClassHeaderCodeSample;
 import com.zf.obscurecode.nw.source.CodeStructure;
 import com.zf.obscurecode.nw.source.CodeType;
 import com.zf.obscurecode.nw.source.VariableType;
@@ -20,11 +21,11 @@ import java.util.Locale;
 
 
 /**
- * 确定要是否要生存自定义类作为类变量类型{@link GeneratorManager#customTypeClassVariableType}，
+ * 确定要是否要生成自定义类作为类变量类型{@link GeneratorManager#customTypeClassVariableType}，
  * 由变量{@link GeneratorManager#variableType}决定；
  * 否则使用内置类型作为变量类型，变量类型由{@link GeneratorManager#variableType1}及{@link GeneratorManager#variableType2}决定,
- * 在确定使用自定义类型变量的情况下，变量{@link GeneratorManager#customTypeClsPath}决定了要生存的类的路径（包名），
- * 变量{@link GeneratorManager#clsName}决定了要生存的类的类名。
+ * 在确定使用自定义类型变量的情况下，变量{@link GeneratorManager#customTypeClsPath}决定了要生成的类的路径（包名），
+ * 变量{@link GeneratorManager#clsName}决定了要生成的类的类名。
  */
 public class GeneratorManager {
     private static GeneratorManager INSTANCE = null;
@@ -37,24 +38,26 @@ public class GeneratorManager {
 
 
     /**
-     * 要生存的变量的类型
+     * 要生成的变量的类型
      */
-    private VariableType variableType1 = VariableType.TypeShortCapital;
-    private VariableType variableType2 = VariableType.TypeShortCapital;
-    private VariableType variableType = VariableType.TypeInner;//指定是否生存自定义类
+    private VariableType variableType1 = VariableType.TypeCharCapital;
+    private VariableType variableType2 = VariableType.TypeCharCapital;
+    private VariableType variableType = VariableType.TypeInner;//指定是否生成自定义类
     /**
      * 自定义类中的变量类型
      */
     private String customTypeClassVariableType = Constant.JavaTypeStrInfo.typeByteCapital;
 
-    //将会提取java 下面的路径名作为生存的包名
+    //将会提取java 下面的路径名作为生成的包名
     private String customTypeClsPath = "E:\\Android\\crazyApp\\FileManager\\app\\src\\main\\java\\com\\amaze\\filemanager\\utils\\application\\";
     private String importClassCodeLine = null;//要导入的类代码
     private String clsName = null;//要导入的类名
 
 
-    private GeneratorManager() {
+    private NameGenerator nameGenerator = null;
 
+    private GeneratorManager() {
+        this.nameGenerator = new NameGenerator();
     }
 
     public VariableType getVariableType1() {
@@ -74,13 +77,21 @@ public class GeneratorManager {
     }
 
     /**
-     * 首次调用时clsName还没生存，这里会指定一个默认的类型{@link GeneratorManager#customTypeClassVariableType}
+     * 获取名字生成器[用于生成类名、变量名]
+     * @return
+     */
+    public NameGenerator getNameGenerator() {
+        return nameGenerator;
+    }
+
+    /**
+     * 首次调用时clsName还没生成，这里会指定一个默认的类型{@link GeneratorManager#customTypeClassVariableType}
      * @return 首次调用返回
      */
     public String getClsName() {
         if (null == clsName) {
             /**
-             * 要生存的类中的变量类型
+             * 要生成的类中的变量类型
              */
             return customTypeClassVariableType;
         }
@@ -89,13 +100,13 @@ public class GeneratorManager {
 
     public void init() {
         /**
-         * 首次运行会生存一个自定义的类
+         * 首次运行会生成一个自定义的类
          */
         if (variableType.isCustomType()) {
             if (null != customTypeClsPath && customTypeClsPath.length() > 0) {
                 CodeGenerator codeGenerator = new CodeGenerator(new VirtualSourceCode());
                 List<CodeSample> codeSamples = codeGenerator.generate(CodeType.INTERFACE);
-                clsName = codeSamples.get(0).className;
+                clsName = ((ClassHeaderCodeSample) codeSamples.get(0)).getClassName();
                 clsName = StringUtil.getFirstCapitalLetter(clsName) + clsName.substring(1);//类名
                 File file = new File(customTypeClsPath + clsName + ".java");
                 importClassCodeLine = "import " + getPackage(file) + "." + clsName + ";";
@@ -105,7 +116,7 @@ public class GeneratorManager {
     }
 
     /**
-     * 生存要导入的自定义类
+     * 生成要导入的自定义类
      * @param file          要写入的文件
      * @param codeSamples   要写入的代码
      */
@@ -130,12 +141,15 @@ public class GeneratorManager {
 
             //写类体
             codeStructure.setDeep(1);
+            int lineCount = 0;
             for (int i = 1; i < (size - 1); i++) {
                 CodeSample codeSample = codeSamples.get(i);
-                if (1 == codeSample.lineCount) {
+                lineCount = codeSample.getLineCount();
+
+                if (1 == lineCount) {
                     printWriter.println(getLineCode(codeStructure, codeSample, 0, Constant.TYPE_CLASS_MEMBER));
                 } else {
-                    for (int k = 0; k < codeSample.lineCount; k++) {
+                    for (int k = 0; k < lineCount; k++) {
                         printWriter.println(getLineCode(codeStructure, codeSample, k, Constant.TYPE_CLASS_MEMBER));
                     }
                 }
@@ -172,6 +186,6 @@ public class GeneratorManager {
     }
 
     private String getLineCode(CodeStructure codeStructure, CodeSample codeSample, int index, int codeType) {
-        return ObscureUtil.getPrefix(codeStructure, codeType) + codeSample.codeLine[index];
+        return ObscureUtil.getPrefix(codeStructure, codeType) + codeSample.getCodeLine()[index];
     }
 }
