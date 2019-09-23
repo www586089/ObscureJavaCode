@@ -40,16 +40,16 @@ public class GeneratorManager {
     /**
      * 要生成的变量的类型
      */
-    private VariableType variableType1 = VariableType.TypeCharCapital;
-    private VariableType variableType2 = VariableType.TypeCharCapital;
-    private VariableType variableType = VariableType.TypeInner;//指定是否生成自定义类
+    private VariableType variableType1 = VariableType.TypeChar;
+    private VariableType variableType2 = VariableType.TypeChar;
+    private VariableType variableType = VariableType.TypeCustom;//指定是否生成自定义类
     /**
      * 自定义类中的变量类型
      */
-    private String customTypeClassVariableType = Constant.JavaTypeStrInfo.typeByteCapital;
+    private String customTypeClassVariableType = Constant.JavaTypeStrInfo.typeByte;
 
     //将会提取java 下面的路径名作为生成的包名
-    private String customTypeClsPath = "E:\\Android\\crazyApp\\FileManager\\app\\src\\main\\java\\com\\amaze\\filemanager\\utils\\application\\";
+    private String customTypeClsPath = "E:\\Android\\radicalApp\\0902\\WalletKeeperPro\\app\\src\\main\\java\\com\\moneymanager2019\\android\\moneykeeper\\";
     private String importClassCodeLine = null;//要导入的类代码
     private String clsName = null;//要导入的类名
 

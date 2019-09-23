@@ -77,9 +77,9 @@ public class CodeWriter {
                     /**
                      * 自定义类需要导入相应的类
                      */
-                    if (isCustomType && !hasImport) {
-                        hasImport = true;
-                        if (lineText.startsWith("package ")) {
+                    if (lineText.startsWith("package ")) {
+                        if (isCustomType && !hasImport) {
+                            hasImport = true;
                             printWriter.println(generatorManager.getImportClassCodeLine());
                         }
                     }

@@ -4,7 +4,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class Constant {
 
-    public static final int DEFAULT_VARIABLE_SIZE = 15;
+    public static final int DEFAULT_VARIABLE_SIZE = 25;
     public static final int MAX_VARIABLE_SIZE = 50;
     public static final int VARIABLE_TRY_COUNT = 3;
 

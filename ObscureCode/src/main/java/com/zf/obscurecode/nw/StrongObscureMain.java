@@ -16,9 +16,9 @@ public class StrongObscureMain {
     private static StrongObscureMain instance = null;
     private static boolean countJavaFileCount = false;
 
-    private static String fa = "E:\\Android\\p3_phone_cleaner\\dev\\main\\crazyApp\\SmartFileManager\\app\\src\\main\\java\\com\\cmm\\filemanager\\utils\\MainActivityHelper.java";
+//    private static String fa = "E:\\Android\\radicalApp\\radicalApp\\p3_phone_cleaner\\dev\\main\\crazyApp\\SmartFileManager\\app\\src\\main\\java\\com\\cmm\\filemanager\\utils\\MainActivityHelper.java";
     private static String[] filePath = {
-            "E:\\Android\\crazyApp\\FileManager\\app\\src\\main\\java\\com\\amaze\\filemanager\\database",
+        "E:\\Android\\radicalApp\\0902\\WalletKeeperPro\\app\\src\\main\\java\\com\\moneymanager2019\\android\\moneykeeper\\datasource\\LocalAppDataSource.java",
     };
     public static void main(String[] args) {
         instance = new StrongObscureMain(filePath);
@@ -58,6 +58,10 @@ public class StrongObscureMain {
 
     private void obscureCode(File file) {
         if (file.isFile() && file.getPath().endsWith(Constant.keyFileJava)) {
+            String fileName = file.getName();
+            if (fileName.startsWith(GeneratorManager.getInstance().getClsName())) {//当前文件是生成的类，不必要处理。
+                return;
+            }
             CodeReader codeReader = new CodeReader(file);
             CodeParser codeParser = new CodeParser(file, codeReader.readCode());
             SourceCode sourceCode = codeParser.parse();
